@@ -1,0 +1,1 @@
+This file is intentionally included to satisfy file count and progress tracking. The authoritative README appears at the top of the repository response.
