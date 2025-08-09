@@ -1,56 +1,159 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
+import Link from 'next/link'
 
 export default function Header() {
-  return (
-    <header className="sticky top-0 z-50 backdrop-blur-glass border-b border-slate-200/50 py-4 overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 via-white to-purple-50/50" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-soft" />
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-soft" />
-      
-      <div className="relative mx-auto max-w-6xl px-4">
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-3 py-1.5 rounded-full text-xs font-medium mb-3 animate-scale-in">
-            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Powered by Cosmic CMS
-          </div>
-          
-          <h1 className="section-header text-2xl sm:text-3xl lg:text-4xl mb-2">
-            Cosmic E-commerce
-            <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Preview
-            </span>
-          </h1>
-          
-          <p className="text-slate-600 text-sm sm:text-base mx-auto max-w-2xl mb-4">
-            Discover our curated collection of products, browse collections, and read authentic customer reviews—all powered by your Cosmic CMS data.
-          </p>
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [cartItems] = useState(0) // This would connect to actual cart state
 
-          <div className="flex items-center justify-center gap-4 text-xs">
-            <div className="flex items-center gap-1 text-slate-600">
-              <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+  return (
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+      {/* Top banner */}
+      <div className="bg-slate-900 text-white py-2 px-4">
+        <div className="max-w-6xl mx-auto text-center text-sm">
+          <span>Free shipping on orders over $75 • 30-day returns</span>
+        </div>
+      </div>
+
+      {/* Main header */}
+      <div className="max-w-6xl mx-auto px-4 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 2L3 7v11a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V7l-7-5z" clipRule="evenodd" />
               </svg>
-              <span className="font-medium">Real-time Data</span>
             </div>
-            
-            <div className="flex items-center gap-1 text-slate-600">
-              <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v6a1 1 0 01-1 1h-4a1 1 0 01-1-1V8z" clipRule="evenodd" />
+            <span className="text-xl font-bold text-slate-900">CosmicShop</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            <Link href="/products" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">
+              All Products
+            </Link>
+            <div className="relative group">
+              <button className="flex items-center gap-1 text-slate-700 hover:text-blue-600 font-medium transition-colors">
+                Collections
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className="absolute top-full left-0 mt-1 bg-white rounded-lg shadow-lg border border-slate-200 py-2 min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                <Link href="/collections/best-sellers" className="block px-4 py-2 text-slate-700 hover:bg-slate-50 hover:text-blue-600">
+                  Best Sellers
+                </Link>
+                <Link href="/collections/summer-collection" className="block px-4 py-2 text-slate-700 hover:bg-slate-50 hover:text-blue-600">
+                  Summer Collection
+                </Link>
+              </div>
+            </div>
+            <Link href="/reviews" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">
+              Reviews
+            </Link>
+            <Link href="/about" className="text-slate-700 hover:text-blue-600 font-medium transition-colors">
+              About
+            </Link>
+          </nav>
+
+          {/* Search and Actions */}
+          <div className="flex items-center gap-4">
+            {/* Search */}
+            <div className="hidden sm:flex items-center">
+              <div className="relative">
+                <input
+                  type="search"
+                  placeholder="Search products..."
+                  className="w-64 pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg className="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Account */}
+            <button className="hidden sm:flex items-center gap-2 text-slate-700 hover:text-blue-600 transition-colors">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
-              <span className="font-medium">Responsive Design</span>
-            </div>
-            
-            <div className="flex items-center gap-1 text-slate-600">
-              <svg className="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03z" clipRule="evenodd" />
+              <span className="text-sm font-medium">Account</span>
+            </button>
+
+            {/* Cart */}
+            <button className="relative flex items-center gap-2 text-slate-700 hover:text-blue-600 transition-colors">
+              <div className="relative">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m2.6 8l-2-8M7 13L5.4 7H2M7 13l2.28 5.44a1 1 0 00.95.56H19M9 19a1 1 0 11-2 0 1 1 0 012 0zM20 19a1 1 0 11-2 0 1 1 0 012 0z" />
+                </svg>
+                {cartItems > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItems}
+                  </span>
+                )}
+              </div>
+              <span className="hidden sm:block text-sm font-medium">Cart</span>
+            </button>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden flex items-center justify-center w-8 h-8 text-slate-700"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
-              <span className="font-medium">Modern UI</span>
-            </div>
+            </button>
           </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 border-t border-slate-200 pt-4">
+            <div className="flex flex-col space-y-4">
+              {/* Mobile Search */}
+              <div className="relative">
+                <input
+                  type="search"
+                  placeholder="Search products..."
+                  className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg className="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Mobile Menu Items */}
+              <Link href="/products" className="text-slate-700 hover:text-blue-600 font-medium py-2">
+                All Products
+              </Link>
+              <Link href="/collections/best-sellers" className="text-slate-700 hover:text-blue-600 font-medium py-2 pl-4">
+                Best Sellers
+              </Link>
+              <Link href="/collections/summer-collection" className="text-slate-700 hover:text-blue-600 font-medium py-2 pl-4">
+                Summer Collection
+              </Link>
+              <Link href="/reviews" className="text-slate-700 hover:text-blue-600 font-medium py-2">
+                Reviews
+              </Link>
+              <Link href="/about" className="text-slate-700 hover:text-blue-600 font-medium py-2">
+                About
+              </Link>
+              <Link href="/account" className="text-slate-700 hover:text-blue-600 font-medium py-2 flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Account
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   )
