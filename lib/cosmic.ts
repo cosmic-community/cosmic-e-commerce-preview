@@ -1,4 +1,3 @@
-// PROGRESS: {"current":9,"total":18,"filename":"lib/cosmic.ts"}
 import { createBucketClient } from '@cosmicjs/sdk'
 import type { CosmicResponse, Product, Review, Collection } from '@/types'
 import { hasStatus } from '@/types'
@@ -8,7 +7,7 @@ const readKey = process.env.COSMIC_READ_KEY as string | undefined
 
 export const cosmic = createBucketClient({
   bucketSlug: bucketSlug ?? '',
-  readKey: readKey ?? ''
+  readKey: readKey ?? '',
   apiEnvironment: "staging"
 })
 
