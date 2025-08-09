@@ -9,6 +9,7 @@ const readKey = process.env.COSMIC_READ_KEY as string | undefined
 export const cosmic = createBucketClient({
   bucketSlug: bucketSlug ?? '',
   readKey: readKey ?? ''
+  apiEnvironment: "staging"
 })
 
 export async function getProducts(limit = 10): Promise<Product[]> {
