@@ -1,4 +1,3 @@
-// PROGRESS: {"current":16,"total":18,"filename":"app/layout.tsx"}
 import './globals.css'
 import type { ReactNode } from 'react'
 import Header from '@/components/Header'
